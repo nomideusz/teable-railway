@@ -1,0 +1,218 @@
+{
+  "services": {
+    "6936d3c3-007c-44d1-8b20-06ac2528015f": {
+      "icon": "https://raw.githubusercontent.com/nomideusz/teable-railway/main/icon.svg",
+      "name": "Teable",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": "/health",
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/teableio/teable:release.2026-10-02T04-02-20Z.3278"
+      },
+      "networking": {
+        "serviceDomains": {
+          "<hasDomain>": {}
+        }
+      },
+      "volumeMounts": {
+        "ef9f0997-3a81-439e-bcd1-ad98e42e840e": {
+          "mountPath": "/app/.assets"
+        }
+      },
+      "variables": {
+        "PORT": {
+          "defaultValue": "3000",
+          "description": "Port Teable listens on - leave as is",
+          "isOptional": false
+        },
+        "PUBLIC_ORIGIN": {
+          "defaultValue": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+          "description": "Public URL of Teable (links, attachments, sharing) - set it to your custom domain after adding one",
+          "isOptional": false
+        },
+        "SECRET_KEY": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Master secret: signs logins and share links and encrypts stored AI keys. BACK IT UP - changing it logs everyone out and breaks stored keys",
+          "isOptional": false
+        },
+        "BACKEND_STORAGE_ENCRYPTION_KEY": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Encrypts attachment access tokens (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_STORAGE_ENCRYPTION_IV": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Attachment token IV (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_ACCESS_TOKEN_ENCRYPTION_KEY": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Encrypts personal API tokens - changing it invalidates every token (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_ACCESS_TOKEN_ENCRYPTION_IV": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "API token IV (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_MAIL_ENCRYPTION_KEY": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Encrypts email unsubscribe links (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_MAIL_ENCRYPTION_IV": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Email link IV (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_DATA_DB_URL_ENCRYPTION_KEY": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "Encrypts external database URLs (16 hex chars)",
+          "isOptional": false
+        },
+        "BACKEND_DATA_DB_URL_ENCRYPTION_IV": {
+          "defaultValue": "${{secret(16, \"0123456789abcdef\")}}",
+          "description": "External database URL IV (16 hex chars)",
+          "isOptional": false
+        },
+        "PRISMA_DATABASE_URL": {
+          "defaultValue": "postgresql://${{Postgres.POSTGRES_USER}}:${{Postgres.POSTGRES_PASSWORD}}@${{Postgres.RAILWAY_PRIVATE_DOMAIN}}:5432/${{Postgres.POSTGRES_DB}}",
+          "description": "Postgres on the private network",
+          "isOptional": false
+        },
+        "BACKEND_CACHE_PROVIDER": {
+          "defaultValue": "redis",
+          "description": "Cache, queues and realtime sync run on Redis",
+          "isOptional": false
+        },
+        "BACKEND_CACHE_REDIS_URI": {
+          "defaultValue": "redis://default:${{Redis.REDIS_PASSWORD}}@${{Redis.RAILWAY_PRIVATE_DOMAIN}}:6379/0?family=0",
+          "description": "Redis on the private network (family=0 lets it connect over IPv6)",
+          "isOptional": false
+        },
+        "BACKEND_MAIL_HOST": {
+          "defaultValue": "",
+          "description": "Optional SMTP server for invitations and password resets (Railway allows outbound SMTP on Pro only)",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_PORT": {
+          "defaultValue": "465",
+          "description": "SMTP port",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_SECURE": {
+          "defaultValue": "true",
+          "description": "true for implicit TLS (port 465), false for STARTTLS (587)",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_AUTH_USER": {
+          "defaultValue": "",
+          "description": "SMTP username",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_AUTH_PASS": {
+          "defaultValue": "",
+          "description": "SMTP password",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_SENDER": {
+          "defaultValue": "",
+          "description": "Sender address for Teable emails",
+          "isOptional": true
+        },
+        "BACKEND_MAIL_SENDER_NAME": {
+          "defaultValue": "Teable",
+          "description": "Sender name for Teable emails",
+          "isOptional": true
+        },
+        "RAILWAY_HEALTHCHECK_TIMEOUT_SEC": {
+          "defaultValue": "600",
+          "description": "First boot runs the database migrations before the health check can pass",
+          "isOptional": false
+        }
+      }
+    },
+    "9dca30ef-e728-4661-b3d7-d2484041d9f8": {
+      "icon": "https://devicons.railway.app/i/postgresql.svg",
+      "name": "Postgres",
+      "build": {},
+      "deploy": {
+        "startCommand": null,
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "ghcr.io/railwayapp-templates/postgres-ssl:17"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "volumeMounts": {
+        "337f32bd-8d90-4a4e-bf7a-087722e5794a": {
+          "mountPath": "/var/lib/postgresql/data"
+        }
+      },
+      "variables": {
+        "POSTGRES_DB": {
+          "defaultValue": "teable",
+          "description": "Database name",
+          "isOptional": false
+        },
+        "POSTGRES_USER": {
+          "defaultValue": "teable",
+          "description": "Database user",
+          "isOptional": false
+        },
+        "POSTGRES_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Auto-generated database password",
+          "isOptional": false
+        },
+        "PGDATA": {
+          "defaultValue": "/var/lib/postgresql/data/pgdata",
+          "description": "Data subdirectory - keeps Postgres happy on Railway volumes",
+          "isOptional": false
+        },
+        "RAILWAY_DEPLOYMENT_DRAINING_SECONDS": {
+          "defaultValue": "60",
+          "description": "Time for Postgres to shut down cleanly on redeploy",
+          "isOptional": false
+        }
+      }
+    },
+    "c4f1b0a2-6d2e-4b8f-9a71-2f5d3e8c7b10": {
+      "icon": "https://devicons.railway.app/i/redis.svg",
+      "name": "Redis",
+      "build": {},
+      "deploy": {
+        "startCommand": "/bin/sh -c \"chown -R redis:redis /data && exec docker-entrypoint.sh redis-server --requirepass $REDIS_PASSWORD --appendonly yes\"",
+        "healthcheckPath": null,
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 10
+      },
+      "source": {
+        "image": "redis:8.10.2-alpine"
+      },
+      "networking": {
+        "serviceDomains": {}
+      },
+      "volumeMounts": {
+        "33e973ff-0fb1-41fc-a30d-3cd8c780f7e0": {
+          "mountPath": "/data"
+        }
+      },
+      "variables": {
+        "REDIS_PASSWORD": {
+          "defaultValue": "${{secret(32, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Auto-generated Redis password",
+          "isOptional": false
+        }
+      }
+    }
+  }
+}

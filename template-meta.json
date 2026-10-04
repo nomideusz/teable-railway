@@ -1,0 +1,8 @@
+{
+  "name": "Teable | Open-Source Airtable Alternative with Postgres & Redis",
+  "short_name": "Teable Production",
+  "description": "No-code Postgres database with grid, kanban, forms and real-time collab",
+  "category": "Other",
+  "image": "https://raw.githubusercontent.com/nomideusz/teable-railway/main/icon.svg",
+  "card_desc": "Teable: the open-source Airtable alternative on real Postgres, with grid, kanban, gallery and form views, real-time collaboration and an API."
+}
