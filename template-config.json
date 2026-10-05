@@ -133,6 +133,11 @@
           "defaultValue": "600",
           "description": "First boot runs the database migrations before the health check can pass",
           "isOptional": false
+        },
+        "SANDBOX_JWT_SECRET": {
+          "defaultValue": "${{secret(48, \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\")}}",
+          "description": "Signs execution tokens between the backend and its built-in code sandbox (port 7070, private network only). Without it Teable falls back to a publicly known default",
+          "isOptional": false
         }
       }
     },

@@ -9,7 +9,7 @@
 The stack is three services: Teable, Postgres and Redis.
 
 - **Upstream's own image, pinned.** Teable runs from the official `ghcr.io/teableio/teable` image at a fixed release tag, so a redeploy never surprises you with an untested version.
-- **No public default keys.** Teable falls back to encryption keys that are published in its git history when they are not set, including the ones protecting attachment links and API tokens. This template generates every one of them (`SECRET_KEY` plus eight 16-character keys) at deploy time, so Teable boots without its security warning.
+- **No public default keys.** Teable falls back to encryption keys that are published in its git history when they are not set, including the ones protecting attachment links and API tokens. This template generates every one of them (`SECRET_KEY`, the built-in code sandbox's `SANDBOX_JWT_SECRET` and eight 16-character keys) at deploy time, so Teable boots without its security warning.
 - **Attachments on a volume.** Uploaded files are stored on a persistent volume mounted at `/app/.assets`, so they survive redeploys.
 - **Redis for realtime and queues.** Teable uses Redis for its cache, background jobs and the real-time sync between browsers. Redis keeps an append-only file on its own volume.
 - **Upgrades that migrate themselves.** Every boot runs Teable's database migrations before serving, and Railway's health check on `/health` only switches traffic once they finish.
@@ -42,7 +42,7 @@ The stack is three services: Teable, Postgres and Redis.
 
 **Email (optional).** Invitations and password resets need SMTP: fill in the `BACKEND_MAIL_*` variables. Railway only allows outbound SMTP on the Pro plan; on other plans use a provider with an HTTPS relay or leave mail off.
 
-**Resources.** Teable runs the app and its plugin server in one container and needs about 1 GB of RAM at idle, so use the Hobby plan or above.
+**Resources.** Teable runs the app, its plugin server and a built-in code sandbox in one container. In testing it settled at about 1.3 GB of RAM at idle (about 1.6 GB for the whole stack with Postgres and Redis), so use the Hobby plan or above.
 
 ## Why Deploy Teable on Railway?
 
