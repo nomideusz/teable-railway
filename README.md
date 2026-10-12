@@ -1,6 +1,6 @@
 # Deploy and Host Teable on Railway
 
-[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/teable-production?utm_medium=integration&utm_source=button&utm_campaign=teable-production)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/teable-production?referralCode=sLjDXb&utm_medium=integration&utm_source=button&utm_campaign=teable-production)
 
 [Teable](https://teable.ai/) is the open-source Airtable alternative built on real Postgres: spreadsheet-style grids that scale to millions of rows, kanban, gallery, calendar and form views, formulas, links between tables, real-time collaboration, record history, and a REST API with personal access tokens. Your data lives in ordinary Postgres tables you can query with SQL. This template runs the official Teable image with Postgres, Redis and a volume for attachments, with every encryption secret generated for you.
 
