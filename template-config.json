@@ -1,7 +1,7 @@
 {
   "services": {
     "6936d3c3-007c-44d1-8b20-06ac2528015f": {
-      "icon": "https://raw.githubusercontent.com/nomideusz/teable-railway/main/icon.svg",
+      "icon": "https://raw.githubusercontent.com/two-workspaces/teable/main/icon.svg",
       "name": "Teable",
       "build": {},
       "deploy": {

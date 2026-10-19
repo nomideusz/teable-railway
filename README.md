@@ -30,7 +30,7 @@ The stack is three services: Teable, Postgres and Redis.
 
 - [Teable documentation](https://help.teable.ai/)
 - [Teable on GitHub](https://github.com/teableio/teable)
-- [Template source on GitHub](https://github.com/nomideusz/teable-railway)
+- [Template source on GitHub](https://github.com/two-workspaces/teable)
 
 ### Implementation Details
 
