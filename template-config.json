@@ -11,7 +11,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "image": "ghcr.io/teableio/teable:release.2026-10-16T07-06-34Z.3445"
+        "image": "ghcr.io/teableio/teable:release.2026-10-23T02-23-06Z.3549"
       },
       "networking": {
         "serviceDomains": {
