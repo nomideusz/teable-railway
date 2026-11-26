@@ -11,7 +11,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "image": "ghcr.io/teableio/teable:release.2026-11-23T09-53-24Z.4031"
+        "image": "ghcr.io/teableio/teable:release.2026-11-24T05-06-24Z.4043"
       },
       "networking": {
         "serviceDomains": {
@@ -201,7 +201,7 @@
         "restartPolicyMaxRetries": 10
       },
       "source": {
-        "image": "redis:8.10.2-alpine"
+        "image": "redis:8.12.0-alpine"
       },
       "networking": {
         "serviceDomains": {}
